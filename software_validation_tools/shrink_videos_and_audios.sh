@@ -1,6 +1,6 @@
 # Before running the script, make it executable by running chmod +x script_name.sh in the terminal, where 
 # script_name.sh is the name of your script file. After that, you can run the script by navigating to the 
-# directory where it's saved and executing ./script_name.sh.
+# directory where it's saved and executing ./script_name.sh
 
 
 
