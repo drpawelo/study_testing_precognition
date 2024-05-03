@@ -18,14 +18,30 @@ print("let's start")
 # variables
 now = datetime.now()
 
-time_int= now.strftime("%S%M%H%d%m") 
-experimanter = "99"
-random_number = random.randint(100,999)
-participant = f"{experimanter}{random_number}{time_int}"
-print("participant",participant)
+time_int= ""
+experimenter = "99"
+random_number = 0
+participant = ""
 experimenter = "auto script"
+time_string = ""
 
-time_string = now.strftime("%m-%d-%Y %H-%M-%S")
+def reset_variables():
+    global time_int
+    global experimenter 
+    global random_number
+    global participant 
+    global experimenter
+    global time_string 
+
+    now = datetime.now()
+    time_int= now.strftime("%S%M%H%d%m") 
+    experimenter = "99"
+    random_number = random.randint(100,999)
+    participant = f"{experimenter}{random_number}{time_int}"
+    experimenter = "auto script"
+    time_string = now.strftime("%m-%d-%Y %H-%M-%S")
+    print("participant",participant)
+
 
 def open_terminal():
     pg.hotkey('ctrl', 'shift', "'")   
@@ -40,7 +56,23 @@ def open_sesame():
     # pg.click(button="right")
     # pg.typewrite("start 'C:\\Users\\apooley\\Documents\\Precognition study\\Study software & outputs - SOFTWARE_VALIDATION\\precog_ganzfeld_Jan_2023.osexp'")
     # pg.press('enter')
-    sleep_dot(5)
+    sleep_dot(6)
+    section_buzz()
+    
+
+
+def close_sesame():
+    sleep_short()
+    pg.moveTo(pg.size()[0] -50, pg.size()[1]/2)
+    pg.click()
+    sleep_short()
+    pg.hotkey('alt', 'f4')   
+    sleep_short()
+    section_buzz()
+    sleep_dot(9)
+    section_buzz()
+
+
 
 def refocus_mouse():
     sleep_short()
@@ -55,8 +87,8 @@ def enter_ratings():
     for index in range(len(positions)):
         pg.moveTo(positions[index][0], positions[index][1])
         pg.doubleClick()
-        type_slowly(ratings[index])
-    sleep_dot(1)
+        type_slowly(ratings[index], withEnter=False)
+    sleep_short()
     done_button = (860,630)
     pg.moveTo(done_button[0], done_button[1])
     pg.doubleClick()
@@ -65,15 +97,17 @@ def enter_ratings():
 
 
 
-def start_study(): 
+def participate_in_study(): 
     pg.hotkey('ctrlleft','r')  
-    sleep_dot(1)
+    sleep_dot(2)
     # rand_number = random.randint(10000, 99999)
 
     pg.typewrite(participant)
     press_and_wait('enter')
-    pg.press('enter')
-    sleep_dot(2)
+    press_and_wait('enter')
+    section_buzz()
+    sleep_dot(3)
+
     refocus_mouse()
     sleep_short("starting study")
     press_and_wait()
@@ -98,17 +132,21 @@ def start_study():
 
 
     # audio
-    sleep_dot(2)
     section_buzz()
-    press_and_wait()
-    press_and_wait()
-    press_and_wait()
-    press_and_wait()
-    press_and_wait()
+    sleep_dot(3)
 
     section_buzz()
-    # videos (3,2,1,video 1s) x4
-    sleep_dot(17)
+    press_and_wait()
+    press_and_wait()
+    press_and_wait()
+    press_and_wait()
+    press_and_wait()
+    section_buzz()
+
+
+    section_buzz()
+    # videos (3,2,1,video 1s) x4 (together 12 seconds)
+    sleep_dot(13)
     section_buzz()
 
     press_and_wait()
@@ -138,12 +176,13 @@ def start_study():
 
 
 
-def type_slowly(word):
+def type_slowly(word, withEnter = True):
     for letter in f"{word}":
         time.sleep(0.05)
         winsound.Beep(int(frequency*1.5), int(duration/5))
         pg.press(letter)
-    press_and_wait('enter')
+    if withEnter:
+        press_and_wait('enter')
     sleep_short()
 
 
@@ -171,20 +210,23 @@ def sleep_short(message = ""):
     # time.sleep(0.5)
         
 def section_buzz():
-    winsound.Beep(int(frequency/3*2), duration )
-    winsound.Beep(int(frequency), duration )
     winsound.Beep(int(frequency/3*4), duration )
+    winsound.Beep(int(frequency), duration )
+    winsound.Beep(int(frequency/3*2), duration )
+    winsound.Beep(int(frequency/3*1), duration )
 
 
 
-def example_click_and_type():
+def run_experiment_once():
+    reset_variables()
     open_terminal()
     open_sesame()
-    start_study()
+    participate_in_study()
+    close_sesame()
     
-     
-
-
+def run_experiment_many_times(how_many_times): 
+    for itteration in range(how_many_times):
+        run_experiment_once()
     
-example_click_and_type()
 
+run_experiment_many_times(3)
