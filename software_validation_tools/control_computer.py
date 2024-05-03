@@ -19,7 +19,7 @@ print("let's start")
 now = datetime.now()
 
 time_int= ""
-experimenter = "99"
+experimenter = "98"
 random_number = 0
 participant = ""
 experimenter = "auto script"
@@ -35,7 +35,7 @@ def reset_variables():
 
     now = datetime.now()
     time_int= now.strftime("%S%M%H%d%m") 
-    experimenter = "99"
+    experimenter = "98"
     random_number = random.randint(100,999)
     participant = f"{experimenter}{random_number}{time_int}"
     experimenter = "auto script"
@@ -53,9 +53,6 @@ def open_sesame():
     print(pg.size()[1])
     pg.moveTo(pg.size()[0] -50, 50)
     pg.doubleClick()
-    # pg.click(button="right")
-    # pg.typewrite("start 'C:\\Users\\apooley\\Documents\\Precognition study\\Study software & outputs - SOFTWARE_VALIDATION\\precog_ganzfeld_Jan_2023.osexp'")
-    # pg.press('enter')
     sleep_dot(6)
     section_buzz()
     
@@ -229,4 +226,4 @@ def run_experiment_many_times(how_many_times):
         run_experiment_once()
     
 
-run_experiment_many_times(3)
+run_experiment_many_times(2000)
