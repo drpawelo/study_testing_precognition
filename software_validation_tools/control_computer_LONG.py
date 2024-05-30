@@ -20,11 +20,17 @@ print("let's start")
 now = datetime.now()
 
 time_int= ""
-experimenter = "98"
+experimenter = "97"
 random_number = 0
 participant = ""
-experimenter = "auto script"
+experimenter = "auto script long"
 time_string = ""
+#in seconds
+video_length = 120
+
+humming_length = 30
+relaxation_minutes = 2
+relaxation_length = relaxation_minutes * 60
 
 def reset_variables():
     global time_int
@@ -174,8 +180,10 @@ def participate_in_study():
 
     # audio
     section_buzz()
-    sleep_dot(3)
-
+    sleep_dot(humming_length)
+    press_and_wait()
+    sleep_dot(relaxation_length)
+    press_and_wait('s')
     section_buzz()
     press_and_wait()
     press_and_wait()
@@ -187,7 +195,8 @@ def participate_in_study():
 
     section_buzz()
     # videos (3,2,1,video 1s) x4 (together 12 seconds)
-    sleep_dot(13)
+    time_for_videos = 4 * (5 + video_length)
+    sleep_dot(time_for_videos)
     section_buzz()
 
     press_and_wait()
@@ -204,7 +213,7 @@ def participate_in_study():
     press_and_wait()
 
     # winning video
-    sleep_dot(2)
+    sleep_dot( 5 + video_length )
 
     press_and_wait()
     # end
@@ -233,8 +242,16 @@ def sleep_dot(seconds):
     print(f"wait {seconds} seconds", end="")
     for which in range(seconds):
         winsound.Beep(frequency, duration *2)
-        time.sleep(1.4)
+        time.sleep(1.2)
         print(">", end='')
+        if which % 10 == 0: 
+            for secblock in range(int(which //10)):
+                time.sleep(0.05)
+                winsound.Beep(int(frequency * 3), duration)
+        if which % 60 == 0: 
+            for minute in range(int(which // 60)):
+                time.sleep(0.05)
+                winsound.Beep(int(frequency * 2), duration)
     winsound.Beep(int(frequency/2), duration *3)
     print()
 
@@ -257,9 +274,9 @@ def section_buzz():
     winsound.Beep(int(frequency/3*1), duration )
 
 
-60705
 
 def run_experiment_once():
+    print("about to run the experiement")
     reset_variables()
     open_terminal()
     open_sesame()
@@ -271,9 +288,25 @@ def run_experiment_many_times(how_many_times):
         run_experiment_once()
     
 
-run_experiment_many_times(1)
+run_experiment_many_times(200)
+
+
+
 
 # reset_variables()
 # open_terminal()
 # open_sesame()
 # test_start_study_ans_size()
+
+
+
+
+
+
+
+
+
+
+
+
+
