@@ -29,7 +29,9 @@ time_string = ""
 video_length = 120
 
 humming_length = 30
-relaxation_minutes = 2
+
+# ABBY - CHANGE IT HERE! to 35
+relaxation_minutes = 35
 relaxation_length = relaxation_minutes * 60
 
 def reset_variables():
@@ -45,7 +47,6 @@ def reset_variables():
     experimenter = "97"
     random_number = random.randint(100,999)
     participant = f"{experimenter}{random_number}{time_int}"
-    experimenter = "auto script"
     time_string = now.strftime("%m-%d-%Y %H-%M-%S")
     print("participant",participant)
 
@@ -183,10 +184,7 @@ def participate_in_study():
     sleep_dot(humming_length)
     press_and_wait()
     sleep_dot(relaxation_length)
-    press_and_wait('s')
     section_buzz()
-    press_and_wait()
-    press_and_wait()
     press_and_wait()
     press_and_wait()
     press_and_wait()
