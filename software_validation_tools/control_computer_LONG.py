@@ -28,11 +28,14 @@ time_string = ""
 #in seconds
 video_length = 120
 
-humming_length = 30
+humming_length = 25
 
-# ABBY - CHANGE IT HERE! to 35
-relaxation_minutes = 35
+relaxation_minutes = 27 # this really is 35minutes, but study time is x1.4 times longer
 relaxation_length = relaxation_minutes * 60
+
+# humming_length = 2
+# relaxation_length = 25
+
 
 def reset_variables():
     global time_int
@@ -243,11 +246,13 @@ def sleep_dot(seconds):
         time.sleep(1.2)
         print(">", end='')
         if which % 10 == 0: 
-            for secblock in range(int(which //10)):
+            seconds_so_far = which % 60
+            for secblock in range(int(seconds_so_far // 10)):
                 time.sleep(0.05)
                 winsound.Beep(int(frequency * 3), duration)
-        if which % 60 == 0: 
-            for minute in range(int(which // 60)):
+        if which % 60 == 0:
+            minutes_so_far = int(which // 60)
+            for minute in range(minutes_so_far):
                 time.sleep(0.05)
                 winsound.Beep(int(frequency * 2), duration)
     winsound.Beep(int(frequency/2), duration *3)
