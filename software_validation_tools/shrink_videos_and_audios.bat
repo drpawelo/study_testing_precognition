@@ -17,8 +17,8 @@ for /r "%SOURCE_DIR%" %%F in (*.avi) do (
     set "NEW_FILE=!FILE:%SOURCE_DIR%=%DEST_DIR%!"
 
     rem Create the directory structure for the new file
-    mkdir "%~dpNEW_FILE%" 2>nul
 
+echo
     rem Use ffmpeg to create a 1-second clip from the original video
     ffmpeg -y -i "!FILE!" -ss 0 -t 1 -c:v copy -c:a copy "!NEW_FILE!"
 )
